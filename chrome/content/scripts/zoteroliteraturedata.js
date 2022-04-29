@@ -18,6 +18,11 @@ const operationNames = {
     "FetchLiteratureAndRelatedPaper": "Fetch Literature And Related Paper"
 };
 
+async function addToReadTagAutomatically(item) {
+    item.addTag('to_read');
+    await item.saveTx();
+}
+
 async function getArxivId(item) {
     let arxiv_id;
 
@@ -168,7 +173,7 @@ Zotero.LiteratureData.notifierCallback = {
     notify: function(event, type, ids, extraData) {
         if (event == 'add') {
             const operation = getPref("autoretrieve");
-            Zotero.LiteratureData.updateItems(Zotero.Items.get(ids), operation);
+            Zotero.LiteratureData.updateItems(Zotero.Items.get(ids), operation, true);
         }
     }
 };
@@ -285,10 +290,10 @@ Zotero.LiteratureData.resetState = function(operation) {
 };
 
 Zotero.LiteratureData.updateSelectedItems = function(operation) {
-    Zotero.LiteratureData.updateItems(ZoteroPane.getSelectedItems(), operation);
+    Zotero.LiteratureData.updateItems(ZoteroPane.getSelectedItems(), operation, false);
 };
 
-Zotero.LiteratureData.updateItems = function(items0, operation) {
+Zotero.LiteratureData.updateItems = function(items0, operation, shouldAddTag) {
     const items = items0.filter(item => !item.isFeedItem);
 
     if (items.length === 0 ||
@@ -314,10 +319,10 @@ Zotero.LiteratureData.updateItems = function(items0, operation) {
     Zotero.LiteratureData.progressWindow.progress =
         new Zotero.LiteratureData.progressWindow.ItemProgress(
             doiIcon, "Retrieving literature data.");
-    Zotero.LiteratureData.updateNextItem(operation);
+    Zotero.LiteratureData.updateNextItem(operation, shouldAddTag);
 };
 
-Zotero.LiteratureData.updateNextItem = function(operation) {
+Zotero.LiteratureData.updateNextItem = function(operation, shouldAddTag) {
     Zotero.LiteratureData.numberOfUpdatedItems++;
 
     if (Zotero.LiteratureData.current == Zotero.LiteratureData.toUpdate - 1) {
@@ -339,11 +344,16 @@ Zotero.LiteratureData.updateNextItem = function(operation) {
 
     Zotero.LiteratureData.updateItem(
         Zotero.LiteratureData.itemsToUpdate[Zotero.LiteratureData.current],
-        operation);
+        operation,
+        shouldAddTag);
 };
 
-Zotero.LiteratureData.updateItem = async function(item, operation) {
+Zotero.LiteratureData.updateItem = async function(item, operation, shouldAddTag) {
     if (item.itemType === "journalArticle") {
+        if (shouldAddTag) {
+            await addToReadTagAutomatically(item);
+        }
+
         let arxiv_id = await getArxivId(item);
 
         if (arxiv_id != "") {
@@ -370,7 +380,7 @@ Zotero.LiteratureData.updateItem = async function(item, operation) {
             }
         }
     }
-    Zotero.LiteratureData.updateNextItem(operation);
+    Zotero.LiteratureData.updateNextItem(operation, shouldAddTag);
 };
 
 if (typeof window !== 'undefined') {

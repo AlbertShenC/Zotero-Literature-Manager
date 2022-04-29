@@ -1,3 +1,6 @@
+*.xpi
+*.zip
+
 # Logs
 logs
 *.log
