@@ -1,0 +1,16 @@
+<!ENTITY zotero.zoteroliteraturedata.fetchliterature.label "Get Literature Data">
+<!ENTITY zotero.zoteroliteraturedata.menu.label "Manage Literature Data">
+<!ENTITY zotero.zoteroliteraturedata.toolsmenu.label "Get literature data for new items">
+<!ENTITY zotero.zoterorelatedpaper.toolsmenu.label "Get related paper for new items">
+<!ENTITY zotero.zoteroliteraturedataandrelatedpaper.toolsmenu.label "Get literature data and related paper for new items">
+
+<!ENTITY literaturedata-preferences-label "Literature Data Manager Preferences…">
+<!ENTITY literaturedata-autoretrieve-label "Get literature data for new items">
+<!ENTITY literaturedata-autoretrieve-fetchliterature-label "Literature Data">
+<!ENTITY literaturedata-autoretrieve-fetchrelatedpaper-label "Related Paper">
+<!ENTITY literaturedata-autoretrieve-fetchliteratureandrelatedpaper-label "Literature Data and Related Paper">
+<!ENTITY literaturedata-autoretrieve-no-label "No">
+<!ENTITY literaturedata-menu-label "Manage Literature Data">
+<!ENTITY literaturedata-menu-fetchliterature-label "Get literature data">
+<!ENTITY literaturedata-menu-fetchrelatedpaper-label "Get related paper">
+<!ENTITY literaturedata-menu-fetchliteratureandrelatedpaper-label "Get literature data and related paper">

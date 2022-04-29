@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<RDF:RDF
+    xmlns:em="http://www.mozilla.org/2004/em-rdf#"
+    xmlns:NC="http://home.netscape.com/NC-rdf#"
+    xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+    <RDF:Description
+        RDF:about="urn:mozilla:install-manifest"
+        em:id="shenhuawen@iie.ac.cn"
+        em:name="Zotero Literature Data Manager"
+        em:version="1.0.0"
+        em:type="2"
+        em:creator="Huawen Shen"
+        em:description="Automatically fetch and update literature data"
+        em:homepageURL="https://github.com/AlbertShenC/Zotero-Literature-Manager"
+        em:updateURL="https://raw.githubusercontent.com/AlbertShenC/Zotero-Literature-Manager/main/update.rdf">
+        <em:type>2</em:type>
+        <em:targetApplication>
+            <Description>
+                <em:id>zotero@chnm.gmu.edu</em:id>
+                <em:minVersion>6.0</em:minVersion>
+                <em:maxVersion>6.*</em:maxVersion>
+            </Description>
+        </em:targetApplication>
+    </RDF:Description>
+</RDF:RDF>

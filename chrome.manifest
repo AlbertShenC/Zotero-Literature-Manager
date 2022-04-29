@@ -1,0 +1,7 @@
+content zoteroliteraturedata chrome/content/
+
+overlay chrome://zotero/content/zoteroPane.xul chrome://zoteroliteraturedata/content/overlay.xul
+
+locale  zoteroliteraturedata  en-US   chrome/locale/en-US/
+
+skin    zoteroliteraturedata  default chrome/skin/default/zoteroliteraturedata/

@@ -1,0 +1,12 @@
+<!ENTITY literaturedata-name "Literature Data Manager">
+<!ENTITY literaturedata-preferences "Literature Data Manager Preferences">
+<!ENTITY autoretrieve-label "Get literature data for new items">
+<!ENTITY autoretrieve-fetchliterature-label "Literature Data">
+<!ENTITY autoretrieve-fetchrelatedpaper-label "Related Paper">
+<!ENTITY autoretrieve-fetchliteratureandrelatedpaper-label "Literature Data and Related Paper">
+<!ENTITY autoretrieve-no-label "No">
+<!ENTITY notfound-tag-label "Literature Data Not Found Tags">
+<!ENTITY notfound-tag-desc "Tags added to items to indicate reasons why unique literature data are not found">
+<!ENTITY tag-invalid-label "Invalid Literature Data">
+<!ENTITY tag-multiple-label "Multiple possible Literature Data found">
+<!ENTITY tag-noliteraturedata-label "No Literature Data found">

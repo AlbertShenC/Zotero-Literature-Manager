@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE overlay SYSTEM "chrome://zoteroliteraturedata/locale/overlay.dtd">
+
+<overlay
+    id="zoteroliteraturedata"
+    xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+    <script src="chrome://zoteroliteraturedata/content/scripts/zoteroliteraturedata.js"/>
+    <script src="chrome://zotero/content/include.js"/>
+
+    <stringbundleset id="stringbundleset">
+        <stringbundle
+            id="literaturedata-bundle"
+            src="chrome://zoteroliteraturedata/locale/zoteroliteraturedata.properties"/>
+    </stringbundleset>
+
+    <popup
+        id="zotero-itemmenu">
+        <menu class="menu-iconic" image="chrome://zoteroliteraturedata/skin/doi@2x.png" id="zotero-itemmenu-literaturedata-menu" label="&literaturedata-menu-label;">
+            <menupopup id="zotero-itemmenu-literaturedata-menupopup">
+                <menuitem
+                    id="zotero-itemmenu-literaturedata-fetchliterature"
+                    label="&literaturedata-menu-fetchliterature-label;"
+                    oncommand="Zotero.LiteratureData.updateSelectedItems('FetchLiterature')"/>
+                <menuitem
+                    id="zotero-itemmenu-literaturedata-fetchrelatedpaper"
+                    label="&literaturedata-menu-fetchrelatedpaper-label;"
+                    oncommand="Zotero.LiteratureData.updateSelectedItems('FetchRelatedPaper')"/>
+                <menuitem
+                    id="zotero-itemmenu-literaturedata-fetchliteratureandrelatedpaper"
+                    label="&literaturedata-menu-fetchliteratureandrelatedpaper-label;"
+                    oncommand="Zotero.LiteratureData.updateSelectedItems('FetchLiteratureAndRelatedPaper')"/>
+            </menupopup>
+        </menu>
+    </popup>
+    
+    <menupopup id="menu_ToolsPopup">
+      <menuitem id="menu_Tools-literaturedata-preferences" label="&literaturedata-preferences-label;" oncommand="Zotero.LiteratureData.openPreferenceWindow();"/>
+    </menupopup>
+
+
+</overlay>

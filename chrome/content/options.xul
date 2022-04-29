@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://zotero-platform/content/preferences.css"?>
+
+<!DOCTYPE window SYSTEM "chrome://zoteroliteraturedata/locale/options.dtd">
+
+<!-- onload="updatePreferenceWindow('all');" -->
+<prefwindow id="literaturedata-pref" title="&literaturedata-preferences;" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	<stringbundleset id="stringbundleset">
+		<stringbundle id="literaturedata-options" src="chrome://zotero-literaturedata/locale/options.properties"/>
+	</stringbundleset>
+  <prefpane label="&literaturedata-preferences;" id="literaturedata-prefpane">
+    <preferences>
+      <preference id="pref-literaturedata-autoretrieve" name="extensions.literaturedata.autoretrieve" type="string"/>
+      <preference id="pref-literaturedata-tag-invalid" name="extensions.literaturedata.tag_invalid" type="string"/>
+      <preference id="pref-literaturedata-tag-multiple" name="extensions.literaturedata.tag_multiple" type="string"/>
+      <preference id="pref-literaturedata-tag-noliteraturedata" name="extensions.literaturedata.tag_noliteraturedata" type="string"/>
+    </preferences>
+      
+    <groupbox>
+      <caption label="&autoretrieve-label;"/>
+      <radiogroup id="id-literaturedata-autoretrieve" preference="pref-literaturedata-autoretrieve">
+        <radio label="&autoretrieve-fetchliterature-label;" value='FetchLiterature'/>
+        <radio label="&autoretrieve-fetchrelatedpaper-label;" value='FetchRelatedPaper'/>
+        <radio label="&autoretrieve-fetchliteratureandrelatedpaper-label;" value='FetchLiteratureAndRelatedPaper'/>
+        <radio label="&autoretrieve-no-label;" value='none'/>
+      </radiogroup>
+    </groupbox>
+    <separator class="thin"/>
+  </prefpane>
+
+  <script src="options.js"/>
+  <script src="chrome://zotero/content/include.js"/>
+
+</prefwindow>
