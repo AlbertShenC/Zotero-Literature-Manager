@@ -131,7 +131,15 @@ async function getAndSetRelatedWork(item, arxiv_id) {
     my_search = new Zotero.Search();
     my_search.libraryID = Zotero.Libraries.userLibraryID;
     my_search.addCondition('itemType', 'is', 'journalArticle');
-    all_items_id = await my_search.search();
+    journal_id = await my_search.search();
+    
+    my_search = new Zotero.Search();
+    my_search.libraryID = Zotero.Libraries.userLibraryID;
+    my_search.addCondition('itemType', 'is', 'conferencePaper');
+    conference_id = await my_search.search();
+    
+    all_items_id = journal_id.concat(conference_id);
+
     all_items = await Zotero.Items.getAsync(all_items_id);
     for (single_key in all_items) {
         single_title = all_items[single_key].getField('title');
@@ -152,13 +160,13 @@ async function setLiteratureData(item, result_literature) {
         item.setField('publicationTitle', result_literature['year_and_conference'])
     }
     if (result_literature['code_url'] !== "") {
-        item.setField('seriesTitle', result_literature['code_url'])
+        item.setField('archiveLocation', result_literature['code_url'])
     }
     if (result_literature['citation'] !== "") {
-        item.setField('extra', result_literature['citation'])
+        item.setField('callNumber', result_literature['citation'])
     }
     if (result_literature['caption'] !== "") {
-        item.setField('seriesText', result_literature['caption'])
+        item.setField('archive', result_literature['caption'])
     }
     item.saveTx();
 }
@@ -369,7 +377,7 @@ Zotero.LiteratureData.updateNextItem = function(operation, shouldAddTag) {
 };
 
 Zotero.LiteratureData.updateItem = async function(item, operation, shouldAddTag) {
-    if (item.itemType === "journalArticle") {
+    if (item.itemType === "journalArticle" || item.itemType === "conferencePaper") {
         if (shouldAddTag) {
             await addToReadTagAutomatically(item);
         }
