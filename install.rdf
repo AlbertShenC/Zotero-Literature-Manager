@@ -7,7 +7,7 @@
         RDF:about="urn:mozilla:install-manifest"
         em:id="shenhuawen@iie.ac.cn"
         em:name="Zotero Literature Data Manager"
-        em:version="1.0.0"
+        em:version="1.0.1"
         em:type="2"
         em:creator="Huawen Shen"
         em:description="Automatically fetch and update literature data"

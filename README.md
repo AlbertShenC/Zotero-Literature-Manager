@@ -20,7 +20,7 @@ This add-on is modified from [zotero-citationcounts](https://github.com/eschnett
   - the date uploaded to ArXiv
   - official code link
   - published year and conference
-  - a automatically generated summary
+  - an automatically generated summary
   - related papers
 
 ## Example

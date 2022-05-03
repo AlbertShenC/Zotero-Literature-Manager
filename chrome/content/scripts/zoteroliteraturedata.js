@@ -5,6 +5,14 @@ if (typeof Zotero === 'undefined') {
 Zotero.LiteratureData = {};
 
 // Definitions
+const skipLiterature = {
+    "citation": ["skip_citation", "skip_all"],
+    "upload_date": ["skip_date", "skip", "skip_all"],
+    "code_url": ["skip_code", "skip", "skip_all"],
+    "year_and_conference": ["skip_conference", "skip", "skip_all"],
+    "caption": ["skip_summary", "skip", "skip_all"],
+    "related": ["skip_related", "skip_all"],
+}
 
 const operations = [
     "FetchLiterature",
@@ -152,20 +160,36 @@ async function getAndSetRelatedWork(item, arxiv_id) {
     }
 }
 
+async function shouldModify(item, result_literature, field) {
+    if (result_literature[field] === "") {
+        return false;
+    }
+    all_tags = item.getTags();
+    for (single_key in all_tags) {
+        target_literature = skipLiterature[field];
+        for (single_literature_key in target_literature) {
+            if (target_literature[single_literature_key] === all_tags[single_key]["tag"]) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
 async function setLiteratureData(item, result_literature) {
-    if (result_literature['upload_date'] !== "") {
+    if (await shouldModify(item, result_literature, "upload_date")) {
         item.setField('date', result_literature['upload_date'])
     }
-    if (result_literature['year_and_conference'] !== "") {
+    if (await shouldModify(item, result_literature, "year_and_conference")) {
         item.setField('publicationTitle', result_literature['year_and_conference'])
     }
-    if (result_literature['code_url'] !== "") {
+    if (await shouldModify(item, result_literature, "code_url")) {
         item.setField('archiveLocation', result_literature['code_url'])
     }
-    if (result_literature['citation'] !== "") {
+    if (await shouldModify(item, result_literature, "citation")) {
         item.setField('callNumber', result_literature['citation'])
     }
-    if (result_literature['caption'] !== "") {
+    if (await shouldModify(item, result_literature, "caption")) {
         item.setField('archive', result_literature['caption'])
     }
     item.saveTx();
