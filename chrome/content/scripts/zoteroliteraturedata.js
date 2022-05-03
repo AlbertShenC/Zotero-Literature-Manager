@@ -90,9 +90,19 @@ async function getPublishYearAndConferenceAndCaptionAndCitation(arxiv_id) {
         if (m) {
             conference = m[1];
         }
-        year_and_conference = year + "-" + conference;
 
-        caption = semantic_response['tldr']['text']
+        if (year === "" || year === null || conference === "") {
+            year_and_conference = "";
+        } else {
+            year_and_conference = year + "-" + conference;
+        }
+
+        if (semantic_response['tldr'] !== null) {
+            caption = semantic_response['tldr']['text'];
+        } else {
+            caption = "";
+        }
+        
         citation = semantic_response['citationCount'];
     }
     return {"year_and_conference": year_and_conference, "caption": caption, "citation": citation}
@@ -135,11 +145,21 @@ async function getAndSetRelatedWork(item, arxiv_id) {
 }
 
 async function setLiteratureData(item, result_literature) {
-    item.setField('date', result_literature['upload_date'])
-    item.setField('publicationTitle', result_literature['year_and_conference'])
-    item.setField('seriesTitle', result_literature['code_url'])
-    item.setField('extra', result_literature['citation'])
-    item.setField('seriesText', result_literature['caption'])
+    if (result_literature['upload_date'] !== "") {
+        item.setField('date', result_literature['upload_date'])
+    }
+    if (result_literature['year_and_conference'] !== "") {
+        item.setField('publicationTitle', result_literature['year_and_conference'])
+    }
+    if (result_literature['code_url'] !== "") {
+        item.setField('seriesTitle', result_literature['code_url'])
+    }
+    if (result_literature['citation'] !== "") {
+        item.setField('extra', result_literature['citation'])
+    }
+    if (result_literature['caption'] !== "") {
+        item.setField('seriesText', result_literature['caption'])
+    }
     item.saveTx();
 }
 
